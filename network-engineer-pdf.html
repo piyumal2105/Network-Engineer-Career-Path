@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Network Engineer Study Guide</title>
+    <style>
+      @media print {
+        body {
+          margin: 0;
+          padding: 20px;
+        }
+        .page-break {
+          page-break-before: always;
+        }
+        .no-print {
+          display: none;
+        }
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", "Helvetica", sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: white;
+        padding: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+        padding-bottom: 20px;
+        border-bottom: 3px solid #667eea;
+      }
+
+      .header h1 {
+        color: #667eea;
+        font-size: 2.5em;
+        margin-bottom: 10px;
+      }
+
+      .header .subtitle {
+        color: #666;
+        font-size: 1.2em;
+        font-style: italic;
+      }
+
+      .header .date {
+        color: #999;
+        font-size: 0.9em;
+        margin-top: 10px;
+      }
+
+      .intro {
+        background: #f8f9fa;
+        padding: 20px;
+        border-left: 4px solid #667eea;
+        margin-bottom: 30px;
+      }
+
+      .intro h2 {
+        color: #667eea;
+        margin-bottom: 10px;
+      }
+
+      .section {
+        margin-bottom: 40px;
+      }
+
+      .section-title {
+        background: #667eea;
+        color: white;
+        padding: 15px 20px;
+        font-size: 1.8em;
+        margin-bottom: 20px;
+        border-radius: 5px;
+      }
+
+      .subsection {
+        margin-bottom: 30px;
+        padding: 20px;
+        background: #f8f9fa;
+        border-left: 4px solid #4ecdc4;
+      }
+
+      .subsection h3 {
+        color: #333;
+        margin-bottom: 15px;
+        font-size: 1.4em;
+      }
+
+      .priority-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.8em;
+        font-weight: bold;
+        margin-left: 10px;
+      }
+
+      .priority-high {
+        background: #ff6b6b;
+        color: white;
+      }
+
+      .priority-medium {
+        background: #feca57;
+        color: #333;
+      }
+
+      .priority-low {
+        background: #48dbfb;
+        color: white;
+      }
+
+      .subsection ul {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      .subsection li {
+        padding: 8px 0;
+        padding-left: 25px;
+        position: relative;
+      }
+
+      .subsection li:before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: #667eea;
+        font-weight: bold;
+      }
+
+      .project {
+        margin-bottom: 25px;
+        padding: 20px;
+        background: white;
+        border: 2px solid #667eea;
+        border-radius: 8px;
+      }
+
+      .project h4 {
+        color: #667eea;
+        margin-bottom: 10px;
+        font-size: 1.3em;
+      }
+
+      .project-meta {
+        margin: 10px 0;
+        font-weight: bold;
+        color: #555;
+      }
+
+      .project ul {
+        margin: 10px 0;
+        padding-left: 20px;
+      }
+
+      .project li {
+        margin: 5px 0;
+      }
+
+      .timeline {
+        margin-bottom: 25px;
+        padding: 15px;
+        background: #f0f4ff;
+        border-left: 4px solid #667eea;
+      }
+
+      .timeline h4 {
+        color: #667eea;
+        margin-bottom: 8px;
+      }
+
+      .timeline p {
+        color: #666;
+      }
+
+      .tips {
+        background: #fff3cd;
+        padding: 20px;
+        border-left: 4px solid #feca57;
+        margin-top: 20px;
+      }
+
+      .tips h4 {
+        color: #856404;
+        margin-bottom: 10px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        border: 1px solid #ddd;
+      }
+
+      th {
+        background: #667eea;
+        color: white;
+      }
+
+      tr:nth-child(even) {
+        background: #f8f9fa;
+      }
+
+      .print-button {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #667eea;
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 5px;
+        font-size: 1em;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+      }
+
+      .print-button:hover {
+        background: #5568d3;
+      }
+
+      strong {
+        color: #667eea;
+      }
+
+      .resource-item {
+        padding: 10px 0;
+        display: flex;
+        align-items: flex-start;
+      }
+
+      .resource-checkbox,
+      .study-checkbox,
+      .timeline-checkbox {
+        margin-right: 10px;
+        margin-top: 3px;
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+        flex-shrink: 0;
+      }
+
+      .resource-item label {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+      }
+
+      .resource-item a {
+        color: #667eea;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .resource-item a:hover {
+        text-decoration: underline;
+      }
+
+      .resource-item input[type="checkbox"]:checked + label {
+        text-decoration: line-through;
+        opacity: 0.6;
+      }
+
+      .progress-tracker {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin-top: 20px;
+        border: 2px solid #667eea;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 30px;
+        background: #e0e0e0;
+        border-radius: 15px;
+        overflow: hidden;
+        margin: 10px 0;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #667eea, #4ecdc4);
+        transition: width 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <button class="print-button no-print" onclick="window.print()">
+      📄 Print to PDF
+    </button> -->
+
+    <div class="header">
+      <h1>🎯 Network Engineer Career Path</h1>
+      <p class="subtitle">
+        Software Engineer → Network Engineer Transition Guide
+      </p>
+    </div>
+
+    <div class="intro">
+      <h2>About This Guide</h2>
+      <p>
+        This comprehensive study guide is designed to help you transition from
+        software engineering to network engineering, specifically tailored for
+        joining Trischel Fabric (Pvt) Ltd's network team in Thulhiriya, Sri
+        Lanka. Trischel recently underwent a major IT infrastructure separation
+        from MAS Holdings, establishing their own independent and secure network
+        infrastructure.
+      </p>
+    </div>
+
+    <!-- Core Study Areas -->
+    <div class="section">
+      <div class="section-title">📚 Core Study Areas</div>
+
+      <div class="subsection" style="border-color: #4ecdc4">
+        <h3>
+          🌐 1. Networking Fundamentals
+          <span class="priority-badge priority-high">HIGH PRIORITY</span>
+        </h3>
+        <ul>
+          <li>OSI Model (7 layers) and TCP/IP Model</li>
+          <li>IP Addressing (IPv4/IPv6) and Subnetting</li>
+          <li>MAC Addresses and ARP Protocol</li>
+          <li>Routing vs Switching concepts</li>
+          <li>VLANs and Trunking</li>
+          <li>NAT and PAT</li>
+          <li>DNS and DHCP configuration</li>
+          <li>Common protocols: HTTP, HTTPS, FTP, SSH, Telnet</li>
+        </ul>
+      </div>
+
+      <div class="subsection" style="border-color: #ff6b6b">
+        <h3>
+          🔒 2. Network Security
+          <span class="priority-badge priority-high">HIGH PRIORITY</span>
+        </h3>
+        <ul>
+          <li>Firewall concepts and configuration</li>
+          <li>VPN technologies (IPSec, SSL VPN)</li>
+          <li>Access Control Lists (ACLs)</li>
+          <li>Network segmentation strategies</li>
+          <li>IDS/IPS systems</li>
+          <li>Wi-Fi security (WPA2, WPA3)</li>
+          <li>Port security and MAC filtering</li>
+          <li>Security best practices for manufacturing</li>
+        </ul>
+      </div>
+
+      <div class="subsection" style="border-color: #a29bfe">
+        <h3>
+          🏢 3. Trischel-Specific Infrastructure
+          <span class="priority-badge priority-high">HIGH PRIORITY</span>
+        </h3>
+        <ul>
+          <li>Active Directory networking (LDAP, Kerberos)</li>
+          <li>Office 365 network requirements</li>
+          <li>ERP system connectivity (SAP/Oracle networking)</li>
+          <li>Network migration strategies</li>
+          <li>Independent infrastructure setup</li>
+          <li>Parent company separation (de-merger experience)</li>
+          <li>Manufacturing floor network requirements</li>
+        </ul>
+      </div>
+
+      <div class="subsection" style="border-color: #fd79a8">
+        <h3>
+          📜 4. Certifications
+          <span class="priority-badge priority-high">HIGH PRIORITY</span>
+        </h3>
+        <ul>
+          <li>
+            <strong>CCNA</strong> - Cisco Certified Network Associate (Most
+            Important)
+          </li>
+          <li>CompTIA Network+ (Good foundation)</li>
+          <li>Microsoft Certified: Windows Server Hybrid Administrator</li>
+          <li>Microsoft 365 Certified: Enterprise Administrator</li>
+          <li>CompTIA Security+ (Security basics)</li>
+        </ul>
+      </div>
+
+      <div class="subsection" style="border-color: #fdcb6e">
+        <h3>
+          🛠️ 5. Routing & Switching
+          <span class="priority-badge priority-medium">MEDIUM PRIORITY</span>
+        </h3>
+        <ul>
+          <li>Static and Dynamic Routing</li>
+          <li>Routing protocols: OSPF, EIGRP, BGP, RIP</li>
+          <li>Spanning Tree Protocol (STP)</li>
+          <li>Link Aggregation (LACP)</li>
+          <li>Inter-VLAN routing</li>
+          <li>Switch configuration and management</li>
+          <li>Router configuration and management</li>
+        </ul>
+      </div>
+
+      <div class="subsection" style="border-color: #00b894">
+        <h3>
+          🏭 6. Manufacturing Networks
+          <span class="priority-badge priority-medium">MEDIUM PRIORITY</span>
+        </h3>
+        <ul>
+          <li>Industrial IoT networking</li>
+          <li>SCADA systems basics</li>
+          <li>OT (Operational Technology) vs IT networks</li>
+          <li>Real-time data transmission</li>
+          <li>Network redundancy and high availability</li>
+          <li>Quality of Service (QoS) for production</li>
+          <li>Industrial protocols (Modbus, Profinet)</li>
+        </ul>
+      </div>
+
+      <div class="subsection" style="border-color: #6c5ce7">
+        <h3>
+          💻 7. Software Engineer Advantage
+          <span class="priority-badge priority-medium"
+            >LEVERAGE YOUR SKILLS</span
+          >
+        </h3>
+        <ul>
+          <li>Python for network automation</li>
+          <li>Network APIs and REST interfaces</li>
+          <li>Ansible for configuration management</li>
+          <li>Git for network configurations</li>
+          <li>Scripting for monitoring and alerts</li>
+          <li>Infrastructure as Code concepts</li>
+          <li>DevOps principles for networking</li>
+        </ul>
+      </div>
+
+      <div class="subsection" style="border-color: #74b9ff">
+        <h3>
+          🔧 8. Tools & Technologies
+          <span class="priority-badge priority-low">LOW PRIORITY</span>
+        </h3>
+        <ul>
+          <li>Wireshark (Packet analysis)</li>
+          <li>PRTG or SolarWinds (Monitoring)</li>
+          <li>GNS3 / Packet Tracer (Lab simulation)</li>
+          <li>PuTTY / SSH clients</li>
+          <li>TFTP/FTP servers</li>
+          <li>Network documentation tools</li>
+          <li>Configuration backup solutions</li>
+        </ul>
+      </div>
+
+      <div class="subsection" style="border-color: #e17055">
+        <h3>
+          📚 9. Learning Resources
+          <span class="priority-badge priority-low">RECOMMENDED</span>
+        </h3>
+        <p style="margin-bottom: 15px; font-style: italic">
+          Click on the links below to access free and paid resources:
+        </p>
+        <div class="resource-item">
+          <input type="checkbox" id="res1" class="resource-checkbox" />
+          <label for="res1"
+            ><a href="https://www.youtube.com/@NetworkChuck" target="_blank"
+              >NetworkChuck (YouTube)</a
+            >
+            - Entertaining and beginner-friendly networking tutorials</label
+          >
+        </div>
+        <div class="resource-item">
+          <input type="checkbox" id="res2" class="resource-checkbox" />
+          <label for="res2"
+            ><a href="https://www.youtube.com/@davidbombal" target="_blank"
+              >David Bombal (YouTube)</a
+            >
+            - In-depth networking and security content</label
+          >
+        </div>
+        <div class="resource-item">
+          <input type="checkbox" id="res3" class="resource-checkbox" />
+          <label for="res3"
+            ><a href="https://www.netacad.com/" target="_blank"
+              >Cisco Networking Academy</a
+            >
+            - Official Cisco CCNA courses (Free & Paid)</label
+          >
+        </div>
+        <div class="resource-item">
+          <input type="checkbox" id="res4" class="resource-checkbox" />
+          <label for="res4"
+            ><a href="https://www.udemy.com/topic/ccna/" target="_blank"
+              >Udemy CCNA Courses</a
+            >
+            - Affordable CCNA preparation courses</label
+          >
+        </div>
+        <div class="resource-item">
+          <input type="checkbox" id="res5" class="resource-checkbox" />
+          <label for="res5"
+            ><a
+              href="https://www.cbtnuggets.com/it-training/networking"
+              target="_blank"
+              >CBT Nuggets</a
+            >
+            - Video training for IT certifications</label
+          >
+        </div>
+        <div class="resource-item">
+          <input type="checkbox" id="res6" class="resource-checkbox" />
+          <label for="res6"
+            ><a
+              href="https://www.pluralsight.com/browse/it-ops/networking"
+              target="_blank"
+              >Pluralsight Networking Paths</a
+            >
+            - Comprehensive networking courses</label
+          >
+        </div>
+        <div class="resource-item">
+          <input type="checkbox" id="res7" class="resource-checkbox" />
+          <label for="res7"
+            ><a href="https://www.gns3.com/" target="_blank">GNS3</a> - Network
+            simulation software (Free)</label
+          >
+        </div>
+        <div class="resource-item">
+          <input type="checkbox" id="res8" class="resource-checkbox" />
+          <label for="res8"
+            ><a
+              href="https://www.netacad.com/courses/packet-tracer"
+              target="_blank"
+              >Cisco Packet Tracer</a
+            >
+            - Network simulation tool (Free)</label
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- Study Timeline -->
+    <div class="section">
+      <div class="section-title">📅 10-Week Study Timeline</div>
+
+      <div class="progress-tracker">
+        <h4 style="margin-bottom: 10px">Overall Progress</h4>
+        <div class="progress-bar">
+          <div class="progress-fill" id="overallProgress" style="width: 0%">
+            0%
+          </div>
+        </div>
+        <p style="margin-top: 10px; color: #666; font-size: 0.9em">
+          Complete tasks to track your progress!
+        </p>
+      </div>
+
+      <br />
+
+      <div class="timeline">
+        <h4>
+          <input type="checkbox" class="timeline-checkbox" /> Week 1-2:
+          Foundation
+        </h4>
+        <p>
+          Focus on networking fundamentals - OSI model, IP addressing,
+          subnetting. Start with free YouTube courses and begin CCNA study
+          materials.
+        </p>
+        <p style="margin-top: 10px"><strong>Resources to complete:</strong></p>
+        <div class="resource-item">
+          <input type="checkbox" class="study-checkbox" />
+          <label>Watch NetworkChuck's "OSI Model Explained" series</label>
+        </div>
+        <div class="resource-item">
+          <input type="checkbox" class="study-checkbox" />
+          <label
+            >Complete subnetting practice on
+            <a href="https://subnettingpractice.com/" target="_blank"
+              >SubnettingPractice.com</a
+            ></label
+          >
+        </div>
+        <div class="resource-item">
+          <input type="checkbox" class="study-checkbox" />
+          <label>Start Cisco Networking Academy CCNA Introduction course</label>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <h4>
+          <input type="checkbox" class="timeline-checkbox" /> Week 3-4: Deepen
+          Core Knowledge
+        </h4>
+        <p>
+          Routing and switching basics, VLANs, security concepts. Set up GNS3 or
+          Packet Tracer for hands-on practice.
+        </p>
+        <p style="margin-top: 10px"><strong>Resources to complete:</strong></p>
+        <div class="resource-item">
+          <input type="checkbox" class="study-checkbox" />
+          <label
+            >Download and install
+            <a href="https://www.gns3.com/" target="_blank">GNS3</a> or
+            <a
+              href="https://www.netacad.com/courses/packet-tracer"
+              target="_blank"
+              >Packet Tracer</a
+            ></label
+          >
+        </div>
+        <div class="resource-item">
+          <input type="checkbox" class="study-checkbox" />
+          <label>Complete David Bombal's VLAN configuration tutorials</label>
+        </div>
+        <div class="resource-item">
+          <input type="checkbox" class="study-checkbox" />
+          <label>Practice basic router and switch configurations</label>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <h4>
+          <input type="checkbox" class="timeline-checkbox" /> Week 5-6:
+          Enterprise Focus
+        </h4>
+        <p>
+          Active Directory networking, Office 365 requirements, ERP
+          connectivity. Research Trischel's infrastructure migration.
+        </p>
+        <p style="margin-top: 10px"><strong>Resources to complete:</strong></p>
+        <div class="resource-item">
+          <input type="checkbox" class="study-checkbox" />
+          <label>Set up Windows Server VM with Active Directory</label>
+        </div>
+        <div class="resource-item">
+          <input type="checkbox" class="study-checkbox" />
+          <label
+            >Study Microsoft 365 networking requirements on
+            <a
+              href="https://learn.microsoft.com/en-us/microsoft-365/"
+              target="_blank"
+              >Microsoft Learn</a
+            ></label
+          >
+        </div>
+        <div class="resource-item">
+          <input type="checkbox" class="study-checkbox" />
+          <label
+            >Research Trischel Fabric on LinkedIn and company website</label
+          >
+        </div>
+      </div>
+
+      <div class="timeline">
+        <h4>
+          <input type="checkbox" class="timeline-checkbox" /> Week 7-8:
+          Practical Skills
+        </h4>
+        <p>
+          Security implementation, network monitoring, troubleshooting. Build
+          confidence with lab scenarios.
+        </p>
+        <p style="margin-top: 10px"><strong>Resources to complete:</strong></p>
+        <div class="resource-item">
+          <input type="checkbox" class="study-checkbox" />
+          <label
+            >Install and learn
+            <a href="https://www.wireshark.org/" target="_blank">Wireshark</a>
+            for packet analysis</label
+          >
+        </div>
+        <div class="resource-item">
+          <input type="checkbox" class="study-checkbox" />
+          <label>Complete firewall and ACL configuration labs</label>
+        </div>
+        <div class="resource-item">
+          <input type="checkbox" class="study-checkbox" />
+          <label>Practice VPN setup and configuration</label>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <h4>
+          <input type="checkbox" class="timeline-checkbox" /> Week 9-10:
+          Interview Prep
+        </h4>
+        <p>
+          Review manufacturing networks, prepare questions, practice explaining
+          concepts. Connect with Trischel on LinkedIn.
+        </p>
+        <p style="margin-top: 10px"><strong>Resources to complete:</strong></p>
+        <div class="resource-item">
+          <input type="checkbox" class="study-checkbox" />
+          <label>Review all study materials and create summary notes</label>
+        </div>
+        <div class="resource-item">
+          <input type="checkbox" class="study-checkbox" />
+          <label
+            >Practice explaining networking concepts to non-technical
+            people</label
+          >
+        </div>
+        <div class="resource-item">
+          <input type="checkbox" class="study-checkbox" />
+          <label>Prepare portfolio of lab projects and documentation</label>
+        </div>
+        <div class="resource-item">
+          <input type="checkbox" class="study-checkbox" />
+          <label>Connect with Trischel employees on LinkedIn</label>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <h4>
+          <input type="checkbox" class="timeline-checkbox" /> Ongoing:
+          Certification Path
+        </h4>
+        <p>
+          Continue CCNA preparation, consider scheduling exam. Keep learning
+          through hands-on practice and real-world scenarios.
+        </p>
+        <p style="margin-top: 10px"><strong>Resources to complete:</strong></p>
+        <div class="resource-item">
+          <input type="checkbox" class="study-checkbox" />
+          <label
+            >Register for CCNA exam on
+            <a
+              href="https://www.cisco.com/c/en/us/training-events/training-certifications/certifications.html"
+              target="_blank"
+              >Cisco's website</a
+            ></label
+          >
+        </div>
+        <div class="resource-item">
+          <input type="checkbox" class="study-checkbox" />
+          <label>Complete practice exams and review weak areas</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- Practical Projects -->
+    <div class="section">
+      <div class="section-title">🚀 Hands-On Practical Projects</div>
+      <p style="margin-bottom: 20px; font-style: italic; color: #666">
+        Just like coding projects build your software engineering portfolio,
+        these network projects will build your practical networking skills!
+      </p>
+
+      <div class="project">
+        <h4>Project 1: Home Network Lab Setup</h4>
+        <p class="project-meta">
+          Goal: Build a virtual network infrastructure from scratch
+        </p>
+        <p><strong>What to do:</strong></p>
+        <ul>
+          <li>Install GNS3 or Packet Tracer</li>
+          <li>
+            Create a network with 3 routers, 4 switches, and multiple VLANs
+          </li>
+          <li>Configure DHCP, DNS, and routing between networks</li>
+          <li>Implement inter-VLAN routing</li>
+          <li>Document your network with diagrams</li>
+        </ul>
+        <p>
+          <strong>Skills gained:</strong> Basic topology design, routing,
+          switching, VLAN configuration
+        </p>
+      </div>
+
+      <div class="project">
+        <h4>Project 2: Secure Corporate Network Simulation</h4>
+        <p class="project-meta">
+          Goal: Design a secure multi-site enterprise network (similar to
+          Trischel's setup)
+        </p>
+        <p><strong>What to do:</strong></p>
+        <ul>
+          <li>Create a headquarters and branch office topology</li>
+          <li>Configure site-to-site VPN between locations</li>
+          <li>Implement firewall rules and ACLs</li>
+          <li>Set up DMZ for web servers</li>
+          <li>
+            Configure network segmentation (Admin, Production, Guest networks)
+          </li>
+          <li>Test connectivity and security policies</li>
+        </ul>
+        <p>
+          <strong>Skills gained:</strong> VPN configuration, security policies,
+          network segmentation, enterprise architecture
+        </p>
+      </div>
+
+      <div class="project">
+        <h4>Project 3: Network Monitoring Dashboard</h4>
+        <p class="project-meta">
+          Goal: Build a network monitoring system (leverage your coding skills!)
+        </p>
+        <p><strong>What to do:</strong></p>
+        <ul>
+          <li>Use Python to create network monitoring scripts</li>
+          <li>Implement SNMP monitoring for devices</li>
+          <li>
+            Build a dashboard to visualize network health (use Flask/Django)
+          </li>
+          <li>Create alerts for network issues (email/SMS notifications)</li>
+          <li>Monitor bandwidth usage, packet loss, latency</li>
+          <li>Log and analyze network traffic patterns</li>
+        </ul>
+        <p>
+          <strong>Skills gained:</strong> Network monitoring, SNMP, Python
+          networking libraries, automation
+        </p>
+      </div>
+
+      <div class="project">
+        <h4>Project 4: Active Directory Lab Environment</h4>
+        <p class="project-meta">
+          Goal: Set up enterprise identity and access management (critical for
+          Trischel)
+        </p>
+        <p><strong>What to do:</strong></p>
+        <ul>
+          <li>Install Windows Server in VirtualBox/VMware</li>
+          <li>Configure Active Directory Domain Services</li>
+          <li>Create OUs, users, groups, and GPOs</li>
+          <li>Set up DNS and DHCP integration</li>
+          <li>Configure file sharing with permissions</li>
+          <li>Implement network-level authentication</li>
+          <li>Practice domain joining and user management</li>
+        </ul>
+        <p>
+          <strong>Skills gained:</strong> Active Directory, Windows networking,
+          authentication protocols, enterprise user management
+        </p>
+      </div>
+
+      <div class="project">
+        <h4>Project 5: Network Automation with Python</h4>
+        <p class="project-meta">
+          Goal: Automate network configuration and management (your software
+          engineering advantage!)
+        </p>
+        <p><strong>What to do:</strong></p>
+        <ul>
+          <li>
+            Use Netmiko or Paramiko libraries to connect to network devices
+          </li>
+          <li>Write scripts to backup router/switch configurations</li>
+          <li>Create automated VLAN provisioning scripts</li>
+          <li>Build a tool to audit network security settings</li>
+          <li>Implement configuration templates with Jinja2</li>
+          <li>Use Git for version control of network configs</li>
+        </ul>
+        <p>
+          <strong>Skills gained:</strong> Network automation, Python networking,
+          DevOps for networks, configuration management
+        </p>
+      </div>
+
+      <div class="page-break"></div>
+
+      <div class="project">
+        <h4>Project 6: Wireless Network Design</h4>
+        <p class="project-meta">
+          Goal: Design and secure a corporate wireless infrastructure
+        </p>
+        <p><strong>What to do:</strong></p>
+        <ul>
+          <li>Plan wireless coverage for office and production floor</li>
+          <li>Configure multiple SSIDs (Employee, Guest, IoT)</li>
+          <li>Implement WPA3 Enterprise with RADIUS authentication</li>
+          <li>Set up wireless VLANs and security policies</li>
+          <li>Configure QoS for VoIP and critical applications</li>
+          <li>Test roaming and signal strength</li>
+        </ul>
+        <p>
+          <strong>Skills gained:</strong> Wireless networking, RADIUS,
+          enterprise WiFi, security best practices
+        </p>
+      </div>
+
+      <div class="project">
+        <h4>Project 7: Network Troubleshooting Scenarios</h4>
+        <p class="project-meta">
+          Goal: Practice diagnosing and fixing network issues
+        </p>
+        <p><strong>What to do:</strong></p>
+        <ul>
+          <li>Use Wireshark to capture and analyze network traffic</li>
+          <li>Diagnose connectivity issues (ping, traceroute, nslookup)</li>
+          <li>Troubleshoot DHCP and DNS problems</li>
+          <li>Identify bottlenecks and performance issues</li>
+          <li>Analyze packet captures for security threats</li>
+          <li>Create a troubleshooting methodology document</li>
+        </ul>
+        <p>
+          <strong>Skills gained:</strong> Packet analysis, troubleshooting
+          methodology, diagnostic tools, problem-solving
+        </p>
+      </div>
+
+      <div class="project">
+        <h4>Project 8: IoT/Manufacturing Network Simulation</h4>
+        <p class="project-meta">
+          Goal: Build a network for IoT devices (relevant for fabric
+          manufacturing)
+        </p>
+        <p><strong>What to do:</strong></p>
+        <ul>
+          <li>Design segregated network for production systems</li>
+          <li>
+            Simulate sensors and IoT devices (use Raspberry Pi or virtual)
+          </li>
+          <li>Implement OT/IT network separation</li>
+          <li>Configure QoS for real-time data transmission</li>
+          <li>Set up data collection and MQTT protocol</li>
+          <li>Test network resilience and redundancy</li>
+        </ul>
+        <p>
+          <strong>Skills gained:</strong> Industrial networking, IoT protocols,
+          OT security, high-availability design
+        </p>
+      </div>
+
+      <div class="project">
+        <h4>Project 9: Network Documentation Portfolio</h4>
+        <p class="project-meta">
+          Goal: Create professional network documentation (show this in
+          interviews!)
+        </p>
+        <p><strong>What to do:</strong></p>
+        <ul>
+          <li>Document all your lab projects with network diagrams</li>
+          <li>Create IP addressing schemes and VLAN tables</li>
+          <li>Write standard operating procedures (SOPs)</li>
+          <li>Build a troubleshooting knowledge base</li>
+          <li>Create configuration templates and best practices</li>
+          <li>Use tools like Draw.io or Lucidchart for diagrams</li>
+          <li>Host documentation on GitHub as portfolio</li>
+        </ul>
+        <p>
+          <strong>Skills gained:</strong> Technical documentation, network
+          design, professional portfolio building
+        </p>
+      </div>
+
+      <div class="project">
+        <h4>Project 10: Simulated Network Migration</h4>
+        <p class="project-meta">
+          Goal: Practice what Trischel actually did - network
+          separation/migration
+        </p>
+        <p><strong>What to do:</strong></p>
+        <ul>
+          <li>Create a "before" network topology (shared infrastructure)</li>
+          <li>Design an "after" topology (independent infrastructure)</li>
+          <li>Plan and document the migration process</li>
+          <li>Migrate Active Directory to new domain</li>
+          <li>Set up new firewall rules and security policies</li>
+          <li>Test connectivity and business continuity</li>
+          <li>Create rollback plan and disaster recovery procedures</li>
+        </ul>
+        <p>
+          <strong>Skills gained:</strong> Network migration, change management,
+          business continuity, risk assessment
+        </p>
+      </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- Tips Section -->
+    <div class="section">
+      <div class="section-title">💡 Tips for Maximum Learning</div>
+
+      <div class="tips">
+        <h4>1. Document Everything</h4>
+        <p>
+          Keep a GitHub repository with your configurations, scripts, and
+          network diagrams. This becomes your portfolio that you can show to
+          Trischel during interviews!
+        </p>
+      </div>
+
+      <div class="tips">
+        <h4>2. Break Things on Purpose</h4>
+        <p>
+          Once a project works, intentionally misconfigure it and practice
+          troubleshooting. This builds real-world skills that you'll need on the
+          job.
+        </p>
+      </div>
+
+      <div class="tips">
+        <h4>3. Combine Software + Networking</h4>
+        <p>
+          Use your Python skills to automate network tasks. This makes you stand
+          out from traditional network engineers and gives you a unique
+          competitive advantage!
+        </p>
+      </div>
+
+      <div class="tips">
+        <h4>4. Share Your Learning</h4>
+        <p>
+          Write blog posts or create YouTube videos about your projects.
+          Teaching others reinforces your knowledge and builds your professional
+          brand.
+        </p>
+      </div>
+    </div>
+
+    <!-- Quick Reference -->
+    <div class="section">
+      <div class="section-title">📋 Quick Reference: Priority Matrix</div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Topic Area</th>
+            <th>Priority</th>
+            <th>Time Investment</th>
+            <th>Trischel Relevance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Networking Fundamentals</td>
+            <td>HIGH</td>
+            <td>2-3 weeks</td>
+            <td>Essential foundation</td>
+          </tr>
+          <tr>
+            <td>Network Security</td>
+            <td>HIGH</td>
+            <td>2 weeks</td>
+            <td>Critical for de-merger</td>
+          </tr>
+          <tr>
+            <td>Trischel Infrastructure (AD, O365)</td>
+            <td>HIGH</td>
+            <td>2 weeks</td>
+            <td>Direct job requirement</td>
+          </tr>
+          <tr>
+            <td>CCNA Certification</td>
+            <td>HIGH</td>
+            <td>Ongoing</td>
+            <td>Industry standard</td>
+          </tr>
+          <tr>
+            <td>Routing & Switching</td>
+            <td>MEDIUM</td>
+            <td>1-2 weeks</td>
+            <td>Core networking skill</td>
+          </tr>
+          <tr>
+            <td>Manufacturing Networks</td>
+            <td>MEDIUM</td>
+            <td>1 week</td>
+            <td>Industry-specific</td>
+          </tr>
+          <tr>
+            <td>Network Automation</td>
+            <td>MEDIUM</td>
+            <td>Ongoing</td>
+            <td>Your unique advantage</td>
+          </tr>
+          <tr>
+            <td>Tools & Technologies</td>
+            <td>LOW</td>
+            <td>As needed</td>
+            <td>Learn on the job</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Company Info -->
+    <div class="section">
+      <div class="section-title">🏢 About Trischel Fabric (Pvt) Ltd</div>
+
+      <div class="intro">
+        <h3>Company Overview</h3>
+        <p>
+          <strong>Location:</strong> MAS Fabric Park, Kurunegala Road,
+          Thulhiriya, Sri Lanka
+        </p>
+        <p>
+          <strong>Parent Company:</strong> MAS Holdings (fully-owned subsidiary)
+        </p>
+        <p><strong>Founded:</strong> 2007</p>
+        <p>
+          <strong>Specialization:</strong> Warp knit and circular knit fabric
+          operations
+        </p>
+        <p>
+          <strong>Unique Position:</strong> Only warp knit manufacturer in Sri
+          Lanka
+        </p>
+      </div>
+
+      <div class="intro" style="margin-top: 20px">
+        <h3>Recent IT Infrastructure Changes</h3>
+        <p>
+          Trischel recently underwent a significant IT infrastructure
+          transformation:
+        </p>
+        <ul style="margin-top: 10px; margin-left: 20px">
+          <li>De-merged from MAS Holdings' IT infrastructure</li>
+          <li>Migrated Active Directory to independent domain</li>
+          <li>Established separate Office 365 tenant</li>
+          <li>Implemented new ERP system</li>
+          <li>Built independent, secure network infrastructure</li>
+          <li>Enhanced security and stability measures</li>
+        </ul>
+        <p style="margin-top: 10px">
+          <strong>Why this matters:</strong> Understanding this migration
+          project is crucial for your interview, as it demonstrates the type of
+          work you'll be involved in.
+        </p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div
+      style="
+        margin-top: 60px;
+        padding-top: 20px;
+        border-top: 2px solid #667eea;
+        text-align: center;
+        color: #666;
+      "
+    >
+      <p><strong>Network Engineer Study Guide</strong></p>
+      <!-- <p>Prepared for Trischel Fabric (Pvt) Ltd Position</p>
+      <p style="font-size: 0.9em; margin-top: 10px">
+        Software Engineer to Network Engineer Transition Guide
+      </p>
+      <p style="font-size: 0.8em; margin-top: 20px; color: #999">
+        Good luck with your preparation and interview! 🚀
+      </p> -->
+    </div>
+
+    <script>
+      // Progress tracking functionality
+      function updateProgress() {
+        const allCheckboxes = document.querySelectorAll(
+          ".study-checkbox, .timeline-checkbox"
+        );
+        const checkedBoxes = document.querySelectorAll(
+          ".study-checkbox:checked, .timeline-checkbox:checked"
+        );
+        const progress = Math.round(
+          (checkedBoxes.length / allCheckboxes.length) * 100
+        );
+
+        const progressBar = document.getElementById("overallProgress");
+        progressBar.style.width = progress + "%";
+        progressBar.textContent = progress + "%";
+
+        // Save progress to localStorage
+        saveProgress();
+      }
+
+      function saveProgress() {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        const progress = {};
+
+        checkboxes.forEach((checkbox, index) => {
+          progress[index] = checkbox.checked;
+        });
+
+        localStorage.setItem("networkStudyProgress", JSON.stringify(progress));
+      }
+
+      function loadProgress() {
+        const savedProgress = localStorage.getItem("networkStudyProgress");
+
+        if (savedProgress) {
+          const progress = JSON.parse(savedProgress);
+          const checkboxes = document.querySelectorAll(
+            'input[type="checkbox"]'
+          );
+
+          checkboxes.forEach((checkbox, index) => {
+            if (progress[index]) {
+              checkbox.checked = true;
+            }
+          });
+
+          updateProgress();
+        }
+      }
+
+      // Add event listeners to all checkboxes
+      document.addEventListener("DOMContentLoaded", function () {
+        const allCheckboxes = document.querySelectorAll(
+          'input[type="checkbox"]'
+        );
+
+        allCheckboxes.forEach((checkbox) => {
+          checkbox.addEventListener("change", updateProgress);
+        });
+
+        // Load saved progress
+        loadProgress();
+      });
+    </script>
+  </body>
+</html>
